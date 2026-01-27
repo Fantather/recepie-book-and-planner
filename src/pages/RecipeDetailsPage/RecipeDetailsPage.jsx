@@ -2,9 +2,9 @@ import "./RecipeDetailsPage.css"
 import { Container, Row, Col } from "react-bootstrap";
 
 import CategoryList from "../../components/CategoryList/CategoryList";
-import RecipeMeta from "../../components/RecipeMeta/RecipeMeta";
-import IngredientList from "../../components/IngredientList/IngredientList";
-import InstructionList from "../../components/InstructionList/InstructionList";
+import RecipeMeta from "./components/RecipeMeta/RecipeMeta";
+import IngredientList from "./components/IngredientList/IngredientList";
+import InstructionList from "./components/InstructionList/InstructionList";
 
 export default function RecipeDetailsPage({recipe})
 {

@@ -5,11 +5,11 @@ const defaultValidateObj = {
     errors: []
 }
 
-export default function useValidate(monitoredValue, ...validityChecks) {
-    const [errors, setErrors] = useState([[]]);
+export default function useValidation(monitoredValue, ...validityChecks) {
+    const [errors, setErrors] = useState([]);
 
     // Если длина у внутренних массивов будет 0, значит ошибок нет
-    const isValid = errors.every(error => error.length === 0);
+    const isValid = errors.length === 0;
     const [isTouched, setIsTouched] = useState(false);
 
 
@@ -23,7 +23,7 @@ export default function useValidate(monitoredValue, ...validityChecks) {
     }, [monitoredValue]);
 
     function validationInput() {
-        const currentErrors = validityChecks.map(check => check(monitoredValue));
+        const currentErrors = validityChecks.map(check => check(monitoredValue)).flat();
         setErrors(currentErrors);
     }
 

@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import RecipeCard from "./components/RecipeCard/RecipeCard";
 
 export default function RecipeList({recipes}) {
     return(

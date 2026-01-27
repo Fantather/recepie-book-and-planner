@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useRecipes } from "../context/recipesContext";
-import useLocalStorage from "./useLocalStorage";
+import { useRecipes } from "../../context/RecipesContext";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 // utils
-import { validateName, validateDurationTime, validateIngredient, validateTemperature } from "../utils/validators";
-import { removeByIndex } from "../utils/arrayFunc";
+import { validateName, validateDurationTime, validateIngredient, validateTemperature } from "../../utils/validators";
+import { removeByIndex } from "../../utils/arrayFunc";
 
 const emptyNewRecipe = {
     name: "", 
@@ -55,7 +55,9 @@ export default function useRecipeForm() {
         setNewRecipe(prev => ({
             ...prev, 
             ingredients: prev.ingredients.map((ingredient, i) => 
-                index === i ? {...ingredient, [field]: value} : ingredient
+                index === i ? 
+                {...ingredient, [field]: value} 
+                : ingredient
             )
         }))
     }

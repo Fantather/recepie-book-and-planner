@@ -7,23 +7,23 @@ import SearchInput from "../../components/SearchInput/SearchInput";
 import FilterSidebar from "../../components/CategoryFilter/FilterSidebar";
 
 import useSearch from "../../hooks/useSearch";
-import { useRecipes } from "../../context/recipesContext";
+import { useRecipes } from "../../context/RecipesContext";
 
 export default function SearchPage() {
-    const allRecipes = useRecipes();
+    const {recipes} = useRecipes();
     const {
         currentRecipes, 
         query, 
         selectedCategories, 
         setQuery, 
         toggleCategory
-    } = useSearch(allRecipes);
+    } = useSearch(recipes);
     
     return(
         <Row>
             <Col md={10}>
                 <Stack className="gap-3">
-                    <SearchInput onSearch={setQuery}  />
+                    <SearchInput onSearch={setQuery}/>
                     <RecipeList recipes={currentRecipes}/>
                 </Stack>
             </Col>
