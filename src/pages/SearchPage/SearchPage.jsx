@@ -4,7 +4,7 @@ import { CATEGORIES } from "../../data/categories";
 
 import RecipeList from "../../components/RecipeList/RecipeList";
 import SearchInput from "../../components/SearchInput/SearchInput";
-import FilterSidebar from "../../components/CategoryFilter/FilterSidebar";
+import FilterSidebar from "../../components/FilterSidebar/FilterSidebar";
 
 import useSearch from "../../hooks/useSearch";
 import { useRecipes } from "../../context/RecipesContext";

@@ -14,7 +14,7 @@ export default function FilterSidebar({points, selectedPoints, onFilterClick}) {
                                 key={point} 
                                 label={point}
                                 checked={isSelected}
-                                onClick={() => onFilterClick(point)}
+                                onChange={() => onFilterClick(point)}
                             />
                         )
                     })}
