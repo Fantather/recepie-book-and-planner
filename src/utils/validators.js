@@ -26,6 +26,13 @@ export function validateIngredient({name, amount}) {
     ].filter(Boolean);
 }
 
+export function validateIngredientAmount(amount) {
+    return [
+        isStringEmpty(amount) ? "Нужно указать количество для ингридиента" : null,
+        !isInteger(amount) ? "Количество ингридиентов должно быть целым числом" : null
+    ].filter(Boolean);
+}
+
 
 // === Вспомогательные функции ===
 

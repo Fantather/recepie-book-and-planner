@@ -1,7 +1,7 @@
 import "./RecipeCard.css"
 
 import { Card, Ratio } from "react-bootstrap";
-import CategoryList from "../CategoryList/CategoryList";
+import CategoryList from "../../../CategoryList/CategoryList";
 
 export default function RecipeCard({imgUrl, name, categories, description}) {
     return(

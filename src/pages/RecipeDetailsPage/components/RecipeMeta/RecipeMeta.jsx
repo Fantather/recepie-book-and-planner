@@ -1,4 +1,6 @@
 import MetaElement from "./MetaElement"
+
+// Выводит дополнительную информацию о рецепте
 export default function RecipeMeta({durationMinutes, temperatureC}) {
     return(
         <div className="row g-5">
