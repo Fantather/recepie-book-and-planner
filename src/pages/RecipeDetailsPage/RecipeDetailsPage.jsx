@@ -12,8 +12,12 @@ import { useParams } from "react-router-dom";
 export default function RecipeDetailsPage()
 {
     const {recipes} = useRecipes();
-    const targetId = useParams("id");
-    const recipe = recipes.find(recipe => recipe.id === targetId);
+    const {id} = useParams();
+    const recipe = recipes.find(recipe => recipe.id === id);
+    if (!recipe) {
+        return <h2>Рецепт не найден</h2>;
+    }
+
     const {
         name, 
         imgUrl,

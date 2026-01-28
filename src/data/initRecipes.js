@@ -6,7 +6,7 @@ const { GRAMS, ML, PCS, TO_TASTE } = UNITS;
 
 export const initRecipes = [
   {
-    id: 1,
+    id: "1",
     name: "Свинной стейк",
     imgUrl: "https://bing.com/th?id=OSK.80bccb01665cbbb41dfeab4e9e350c90",
     categories: [LUNCH, DINNER],
@@ -31,7 +31,7 @@ export const initRecipes = [
     ]
   },
   {
-    id: 2,
+    id: "2",
     name: "Омлет с томатами",
     imgUrl: "https://bing.com/th?id=OSK.9b97de570b0af3f489ee9933de3aef97",
     categories: [BREAKFAST],
@@ -54,7 +54,7 @@ export const initRecipes = [
     ]
   },
   {
-    id: 3,
+    id: '3',
     name: "Куриные ножки с травами",
     imgUrl: "https://bing.com/th?id=OSK.4ed7bc46c8c381cb678758006de663ab",
     categories: [LUNCH, DINNER],
@@ -77,7 +77,7 @@ export const initRecipes = [
     ]
   },
   {
-    id: 4,
+    id: '4',
     name: "Запеченный картофель",
     imgUrl: "https://bing.com/th?id=OSK.3bd251d6df114476df651817dc48531a",
     categories: [LUNCH, DINNER],
@@ -99,7 +99,7 @@ export const initRecipes = [
     ]
   },
   {
-    id: 5,
+    id: "5",
     name: "Творожная запеканка",
     imgUrl: "https://th.bing.com/th/id/OIP.wXMs3_z6xwmTdGUwp7hk9AHaE8?w=271&h=181&c=7&r=0&o=7&cb=defcachec2&dpr=1.3&pid=1.7&rm=3",
     categories: [BREAKFAST, DINNER],
