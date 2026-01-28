@@ -21,7 +21,7 @@ export default function IngredientRow({ingredient, onChange, onDelete}) {
         ...amountValidate.errors
     ];
 
-    const {name, amount, unit} = ingredient
+    const {name, amount, unit} = ingredient;
     return(
         <div>
             <ErrorCard errors={errors}/>

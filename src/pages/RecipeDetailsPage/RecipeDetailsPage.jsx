@@ -6,8 +6,14 @@ import RecipeMeta from "./components/RecipeMeta/RecipeMeta";
 import IngredientList from "./components/IngredientList/IngredientList";
 import InstructionList from "./components/InstructionList/InstructionList";
 
-export default function RecipeDetailsPage({recipe})
+import { useRecipes } from "../../context/RecipesContext";
+import { useParams } from "react-router-dom";
+
+export default function RecipeDetailsPage()
 {
+    const {recipes} = useRecipes();
+    const targetId = useParams("id");
+    const recipe = recipes.find(recipe => recipe.id === targetId);
     const {
         name, 
         imgUrl,

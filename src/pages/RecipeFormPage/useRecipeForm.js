@@ -1,164 +1,80 @@
 import { useState } from "react";
-import { useRecipes } from "../../context/RecipesContext";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import * as recipeModel from "../../models/recipe.model"; // Путь может отличаться в зависимости от структуры папок
+import * as ingredientModel from "../../models/ingredient.model";
 
-// utils
-import { validateName, validateDurationTime, validateIngredient, validateTemperature } from "../../utils/validators";
-import { removeByIndex } from "../../utils/arrayFunc";
+export default function useRecipeForm(initRecipe) {
+  // Если начальный рецепт не передан, создаем пустой через модель
+  const [recipe, setRecipe] = useState(initRecipe || recipeModel.getEmptyRecipe());
 
-const emptyNewRecipe = {
-    name: "", 
-    imgUrl: "",
-    categories: [],       // Массив строк
-    ingredients: [],      // Массив объектов
-    temperatureC: "",     // Number
-    durationMinutes: "",  // Number 
-    instructions: []      // Массив строк
-}
+  // === Основные поля ===
 
-const emptyErrors = {
-    errorName: [], 
-    errorIngredient: [],
-    errorTemperature: [],
-    errorDurationMinutes: []
-}
+  function changeName(newName) {
+    setRecipe(prev => recipeModel.updateName(prev, newName));
+  }
 
-const emptyIngredient = {
-    name: "",       // Строка
-    amount: "",     // Number
-    unit: ""        // Строка
-}
+  function changeImgUrl(newUrl) {
+    setRecipe(prev => recipeModel.updateImgUrl(prev, newUrl));
+  }
 
-const emptyInstruction = "";
+  function changeTemperature(newTemp) {
+    setRecipe(prev => recipeModel.updateTemperature(prev, newTemp));
+  }
 
-export default function useRecipeForm() {
-    const {newRecipe, setNewRecipe} = useLocalStorage("newRecipe", emptyNewRecipe);
-    const [validityRegistry, setValidityRegistry] = useState({});
-    const {addRecipe} = useRecipes();
+  function changeDuration(newDuration) {
+    setRecipe(prev => recipeModel.updateDurationMinutes(prev, newDuration));
+  }
+
+  // === Категории ===
+
+  // Добавить/удалить категорию
 
 
-    // Изменение всех простых полей объекта
-    function handleFieldChange(e) {
-        const {name, value} = e.target;
-        setNewRecipe(prev => ({...prev, [name]:value}));
-    }
+  // === Ингредиенты ===
+  
+  function addIngredient() {
+    const emptyIngredient = ingredientModel.getEmptyIngredient();
+    setRecipe(prev => recipeModel.addIngredient(prev, emptyIngredient));
+  }
 
-    // Управление ингридиентами
-    function addIngredient() {
-        setNewRecipe(prev => ({
-            ...prev, 
-            ingredients: [...prev.ingredients, emptyIngredient]
-        }));
-    }
+  function removeIngredient(index) {
+    setRecipe(prev => recipeModel.removeIngredient(prev, index));
+  }
 
-    function changeIngredient(index, field, value) {
-        setNewRecipe(prev => ({
-            ...prev, 
-            ingredients: prev.ingredients.map((ingredient, i) => 
-                index === i ? 
-                {...ingredient, [field]: value} 
-                : ingredient
-            )
-        }))
-    }
+  function updateIngredient(index, field, value) {
+    setRecipe(prev => recipeModel.updateIngredient(prev, index, field, value));
+  }
 
-    function removeIngredient(index) {
-        setNewRecipe(prev => ({
-            ...prev,
-            ingredients: removeByIndex(prev.ingredients, index)
-        }))
-    }
+  // === Инструкции ===
+  
+  function addInstruction() {
+    setRecipe(prev => {
+        const newInstruction = instructionModel.getEmptyInstruction();
+        recipeModel.addInstruction(prev, newInstruction);
+    });
+  }
 
-    // Управление категориями
-    function addCategory(newCategory) {
-        setNewRecipe(prev => ({
-            ...prev,
-            categories: prev.categories.includes(newCategory) ? prev 
-            : {...prev, categories: [...prev.categories, newCategory]}
-        }));
-    }
+  function removeInstruction(id) {
+    setRecipe(prev => recipeModel.removeInstruction(prev, id));
+  }
 
-    function removeCategory(targetIndex) {
-        setNewRecipe(prev => ({
-            ...prev,
-            categories: removeByIndex(prev.categories, targetIndex)
-        }))
-    }
+  function updateInstruction(id, text) {
+    setRecipe(prev => recipeModel.updateInstruction(prev, id, text));
+  }
 
-    // Управление Инструкциями
-    function addInstruction() {
-        setNewRecipe(prev => ({
-            ...prev,
-            instructions: [...prev.instructions, emptyInstruction]
-        }));
-    }
-
-    function changeInstruction(targetIndex, newValue) {
-        setNewRecipe(prev => ({
-            ...prev,
-            instructions: prev.instructions.map((oldInstruction, i) => 
-                targetIndex === i ? newValue : oldInstruction 
-            )
-        }))
-    }
-
-    function removeInstruction(index) {
-        setNewRecipe(prev => ({
-            ...prev,
-            instructions: removeByIndex(prev.instructions, index)
-        }));
-    }
-
-    // === Валидация ===
-
-    // Реакция на изменение статуса валидности компонента
-    function handleValidityChange(targetId, newValue) {
-        setValidityRegistry(prev => ({
-            ...prev,
-            [targetId]: newValue
-        }))
-    }
-
-    //Проверка валидности всех полей формы
-    function validateForm() {
-        const { name, ingredients, temperatureC, durationMinutes } = newRecipe;
-        
-        const tempErrors = {...emptyErrors};
-        tempErrors.errorName = validateName(name);
-        tempErrors.errorTemperature = validateTemperature(temperatureC);
-        tempErrors.errorDurationMinutes = validateDurationTime(durationMinutes);
-        tempErrors.errorIngredient = ingredients.map(ingredient => validateIngredient(ingredient));
-        setErrors(tempErrors);
-
-        const isValidate = tempErrors.errorName.length === 0 && 
-                    tempErrors.errorTemperature.length === 0 &&
-                    tempErrors.errorDurationMinutes.length === 0 &&
-                    tempErrors.errorIngredient.every(
-                        errs => errs.length === 0
-                    )
-
-        return isValidate;
-    }
-
-    return {
-        newRecipe, 
-
-        errors,
-        setErrors,
-
-        addRecipe, 
-
-        handleFieldChange,
-
-        addCategory, 
-        removeCategory, 
-
-        addIngredient, 
-        changeIngredient,
-        removeIngredient, 
-
-        addInstruction,
-        changeInstruction,
-        removeInstruction    
-    };
+  return {
+    recipe,
+    // Поля
+    changeName,
+    changeImgUrl,
+    changeTemperature,
+    changeDuration,
+    // Коллекции
+    toggleCategory,
+    addIngredient,
+    removeIngredient,
+    updateIngredient,
+    addInstruction,
+    removeInstruction,
+    updateInstruction
+  };
 }

@@ -1,9 +1,10 @@
 import "./RecipeCard.css"
 
+import { Link } from "react-router-dom";
 import { Card, Ratio } from "react-bootstrap";
 import CategoryList from "../../../CategoryList/CategoryList";
 
-export default function RecipeCard({imgUrl, name, categories, description}) {
+export default function RecipeCard({id, imgUrl, name, categories, description}) {
     return(
         <Card className="h-100">
             <Ratio aspectRatio="16x9">
@@ -13,6 +14,7 @@ export default function RecipeCard({imgUrl, name, categories, description}) {
                 <Card.Title>{name}</Card.Title>
                 <CategoryList categories={categories} />
                 <Card.Text>{description}</Card.Text>
+                <Link to={`/details/${id}`}>Детали</Link>
             </Card.Body>
         </Card>
     );

@@ -105,8 +105,7 @@ export function updateDurationMinutes(recipe, newDuration) {
 
 // === Работа с Инструкциями ===
 
-export function addInstruction(recipe) {
-    const newInstruction = instructionModel.getEmptyInstruction();
+export function addInstruction(recipe, newInstruction) {
     const currentList = recipe[INSTRUCTIONS];
     
     const newList = instructionModel.addInstruction(currentList, newInstruction);
