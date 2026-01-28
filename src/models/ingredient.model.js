@@ -26,7 +26,7 @@ export function updateIngredient(ingredient, field, newValue) {
 
 
 // === Управление массивом ингридиентов ===
-// Я понимаю что мог бы сделать поиск через id и это было бы максимально надёжно и в целом удобнее
+// Я понимаю что мог бы сделать поиск нужного ингридиаента через id и это было бы максимально надёжно и в целом удобнее
 // Но id я добавил сильно позже, когда модели дописал и начал писать UI и уже не хотел переписывать
 
 
@@ -34,7 +34,7 @@ export function getDefaultIngredientsArray() {
     return [getEmptyIngredient()];
 }
 
-export function pushIngredient(ingredients, newIngredient) {
+export function addIngredient(ingredients, newIngredient) {
     return [...ingredients, newIngredient];
 }
 
@@ -42,7 +42,7 @@ export function removeIngredient(ingredients, targetIndex) {
     return ingredients.filter((ingredient, i) => i !== targetIndex);
 }
 
-export function updateIngredientInArray(ingredients, newValue, targetIndex, field) {
+export function updateIngredientInArray(ingredients, targetIndex, field, newValue) {
     return ingredients.map((ingredient, i) => 
                 targetIndex === i ? 
                 updateIngredient(ingredient, field, newValue) 

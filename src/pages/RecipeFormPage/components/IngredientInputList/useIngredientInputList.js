@@ -7,14 +7,14 @@ export default function useIngredientInputList(initIngredients = ingredientModel
 
     function updateIngredient(targetIndex, field, newValue) {
         setIngredients(prev => 
-            ingredientModel.updateIngredientInArray(prev, newValue, targetIndex, field)
+            ingredientModel.updateIngredientInArray(prev, targetIndex, field, newValue)
         );
     }
 
     function addIngredient() {
-        const {pushIngredient, getEmptyIngredient} = ingredientModel;
+        const {addIngredient, getEmptyIngredient} = ingredientModel;
         setIngredients(prev =>
-            pushIngredient(prev, getEmptyIngredient())
+            addIngredient(prev, getEmptyIngredient())
         );
     }
 

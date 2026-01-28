@@ -21,8 +21,6 @@ export default function IngredientRow({ingredient, onChange, onDelete}) {
         ...amountValidate.errors
     ];
 
-    console.log(errors);
-
     const {name, amount, unit} = ingredient
     return(
         <div>

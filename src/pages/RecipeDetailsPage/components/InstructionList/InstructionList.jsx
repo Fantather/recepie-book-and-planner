@@ -5,9 +5,9 @@ export default function InstructionList({instructions}) {
     return(
         <div>
             {instructions.map((instruction, index) => 
-                <Card key={index} className="mb-3">
+                <Card key={instruction.id} className="mb-3">
                     <Card.Header>Шаг {index + 1}/{maxSteps}</Card.Header>
-                    <Card.Body>{instruction}</Card.Body>
+                    <Card.Body>{instruction.text}</Card.Body>
                 </Card>
             )}
         </div>

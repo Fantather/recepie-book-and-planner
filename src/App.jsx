@@ -8,8 +8,8 @@ import { initRecipes } from './data/initRecipes';
 function App() {
   return (
     <>
-      {/* <RecipeFormPage/> */}
-      <SearchPage/>
+      <RecipeFormPage/>
+      {/* <SearchPage/> */}
       {/* <RecipeDetailsPage recipe={initRecipes[0]}/> */}
     </>
   )
